@@ -1,4 +1,4 @@
-import { trim, lowerCase, split, size, slice, startsWith, get, toString, includes } from 'lodash';
+import { trim, toLower, split, size, slice, startsWith, get, toString, includes } from 'lodash';
 import bech32 from 'bech32';
 import { Buffer } from 'buffer';
 import { BOLT11_SCHEME, LIGHTNING_SCHEME, LNURL_SCHEME } from '../variables/labels';
@@ -65,7 +65,8 @@ const handleBolt11 = (invoice) => {
 const parseInvoice = async (invoice) => {
     if (!invoice || invoice === '') return null;
 
-    const lowercaseInvoice = invoice.toLowerCase().trim();
+    const lowercaseInvoice = trim(toLower(invoice));
+    console.log(lowercaseInvoice)
     let requestCode = lowercaseInvoice;
 
     if (validateInternetIdentifier(requestCode)) {
