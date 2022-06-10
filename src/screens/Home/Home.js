@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { size } from 'lodash';
-import { View, Text, Button, StyleSheet, TextInput } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
 import { parseInvoice } from '../../utils/invoices';
+import Button from '../../components/Button/Button';
 
 const styles = StyleSheet.create({
     container: {
@@ -77,7 +78,6 @@ const Home = ({ navigation }) => {
 
     return (
         <View style={styles.container}>
-            <Text>To start, scan your LN Invoice!</Text>
             <Button
                 title='Scan'
                 onPress={() => navigation.navigate('Scan')}
@@ -90,7 +90,8 @@ const Home = ({ navigation }) => {
             />
             <Button
                 title='Send'
-                onPress={getInvoiceDetails}
+                //onPress={getInvoiceDetails}
+                onPress={() => alert('Se lo dedico a Juan')}
             />
         </View>
     );
