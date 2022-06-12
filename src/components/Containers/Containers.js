@@ -13,7 +13,14 @@ const Container = ({
     justifyContent,
     backgroundColor,
     padding,
+    border,
+    borderColor,
     borderRadius,
+    maxHeight,
+    minHeight,
+    fixedHeight,
+    width,
+    margin,
     ...props
 }) => (
     <View
@@ -24,7 +31,13 @@ const Container = ({
             justifyContent,
             backgroundColor,
             padding,
-            borderRadius
+            borderWidth: border,
+            borderColor,
+            borderRadius,
+            maxHeight: maxHeight || fixedHeight,
+            minHeight: minHeight || fixedHeight,
+            width,
+            margin
         })}
         { ...props }
     >
@@ -38,7 +51,16 @@ Container.propTypes = {
     flex: number,
     alignItems: string,
     justifyContent: string,
-    backgroundColor: string
+    backgroundColor: string,
+    padding: number,
+    border: number,
+    borderColor: string,
+    borderRadius: number,
+    maxHeight: number,
+    minHeight: number,
+    fixedHeight: number,
+    width: number,
+    margin: number
 };
 
 Container.defaultProps = {
@@ -46,8 +68,7 @@ Container.defaultProps = {
     flexDirection: 'column',
     flex: 1,
     alignItems: 'flex-start',
-    justifyContent: 'flex-start',
-    backgroundColor: WHITE
+    justifyContent: 'flex-start'
 };
 
 const Row = ({ children, ...props }) => (

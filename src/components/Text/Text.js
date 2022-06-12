@@ -1,18 +1,20 @@
 import React from 'react';
 import { string } from 'prop-types';
 import { Text as RNText, StyleSheet } from 'react-native';
-import { get } from 'lodash';
+import { get, upperFirst } from 'lodash';
 import i18n from '../../utils/i18n';
 
 const buttonStyles = styles => StyleSheet.create(styles);
 
-const Text = ({ text, color }) => (
+const Text = ({ text, color, fontWeight, autoCapitalize, ...props }) => (
     <RNText
         style={buttonStyles({
-            color
+            color,
+            fontWeight
         })}
+        { ...props }
     >
-        { text }
+        { autoCapitalize ? upperFirst(text) : text }
     </RNText>
 );
 

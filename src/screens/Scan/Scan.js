@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Column, Container, Row, Text } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+
+const opacity = 'rgba(0, 0, 0, .6)';
 
 const Scan = () => {
     const [hasPermission, setHasPermission] = useState(null);
@@ -13,19 +16,27 @@ const Scan = () => {
     }, []);
 
     if (hasPermission === null) {
-        return <Text>Requesting for camera permission</Text>;
+        return <Text text='Requesting for camera permission' />;
       }
       if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
+        return <Text text='No access to camera' />;
       }
 
     return (
-        <View style={{ flex: 1 }}>
-            <BarCodeScanner
-                onBarCodeScanned={data => console.log(data)}
-                style={StyleSheet.absoluteFillObject}
-            />
-        </View>
+        <BarCodeScanner
+            onBarCodeScanned={data => console.log(data)}
+            style={StyleSheet.absoluteFill}
+        >
+            <Row backgroundColor={opacity} />
+            <Row style={{ flex: 1, flexDirection: 'row' }}>
+                <Column backgroundColor={opacity} />
+                <Column flex={3} />
+                <Column backgroundColor={opacity} />
+            </Row>
+            <Row backgroundColor={opacity}>
+                <Text text='Here we will show possible error messages' color='white' />
+            </Row>
+        </BarCodeScanner>
     );
 };
 

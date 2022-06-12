@@ -1,5 +1,5 @@
 import React from 'react';
-import { string, func } from 'prop-types';
+import { string, func, number } from 'prop-types';
 import { get } from 'lodash';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container } from '../Containers';
@@ -12,16 +12,28 @@ const buttonStyles = ({ color, ...styles }) => StyleSheet.create({
     backgroundColor: color
 });
 
-const Button = ({ title, onPress, color, backgroundColor, ...props }) => (
+const Button = ({
+    title,
+    onPress,
+    color,
+    backgroundColor,
+    fontWeight,
+    margin,
+    paddingHorizontal,
+    paddingVertical,
+    borderRadius
+}) => (
     <TouchableOpacity onPress={onPress}>
         <Container
             backgroundColor={backgroundColor}
             flexDirection='column'
             flex={0}
-            padding={10}
-            borderRadius={5}
+            paddingHorizontal={paddingHorizontal}
+            paddingVertical={paddingVertical}
+            borderRadius={borderRadius}
+            margin={margin}
         >
-            <Text color={color} text={title} />
+            <Text color={color} text={title} fontWeight={fontWeight} autoCapitalize />
         </Container>
     </TouchableOpacity>
 );
@@ -30,14 +42,24 @@ Button.propTypes = {
     title: string,
     onPress: func,
     color: string,
-    backgroundColor: string
+    backgroundColor: string,
+    fontWeight: string,
+    margin: number,
+    paddingHorizontal: number,
+    paddingVertical: number,
+    borderRadius: number
 };
 
 Button.defaultProps = {
     title: get(i18n, 'es.button'),
     onPress: () => {},
     color: WHITE,
-    backgroundColor: GREEN
+    backgroundColor: GREEN,
+    fontWeight: 'regular',
+    margin: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5
 }
 
 export default Button;

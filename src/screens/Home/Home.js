@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { size } from 'lodash';
-import { View, StyleSheet, TextInput } from 'react-native';
+import { size, get } from 'lodash';
 import { parseInvoice } from '../../utils/invoices';
-import Button from '../../components/Button/Button';
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    }
-});
+import { Button, Container, Text } from '../../components';
+import i18n from '../../utils/i18n';
 
 const initialStatusState = {
     error: {},
@@ -77,23 +68,17 @@ const Home = ({ navigation }) => {
     console.log(statusStatetate)
 
     return (
-        <View style={styles.container}>
+        <Container
+            alignItems='center'
+            justifyContent='center'
+        >
+            <Text text={get(i18n, 'es.text_start_scan')} />
             <Button
-                title='Scan'
+                title={get(i18n, 'es.scan')}
+                fontWeight='bold'
                 onPress={() => navigation.navigate('Scan')}
             />
-            <TextInput
-                style={{ borderColor: '#eaeaea', borderWidth: 1, width: 300, height: 40 }}
-                value={invoiceValue}
-                onChangeText={value => setInvoiceValue(value)}
-                autoCapitalize='none'
-            />
-            <Button
-                title='Send'
-                //onPress={getInvoiceDetails}
-                onPress={() => alert('Se lo dedico a Juan')}
-            />
-        </View>
+        </Container>
     );
 };
 
