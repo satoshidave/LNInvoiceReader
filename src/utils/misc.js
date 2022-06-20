@@ -1,5 +1,5 @@
-import { Platform, Dimensions } from 'react-native';
-import { get, includes } from 'lodash';
+import { Platform, Dimensions, StyleSheet } from 'react-native';
+import { get, includes, forEach } from 'lodash';
 
 const { OS: phoneOS, Version: phoneVersion, isPad } = Platform;
 const windowDimensions = Dimensions.get("window");
@@ -18,6 +18,16 @@ const getScreenSizeByPercentage = (percentage, measure) => {
     return (percentage * size) / 100;
 };
 
+const componentStyles = styles => {
+    const filteredStyles = {};
+    forEach(styles, (element, index) => {
+        if (element || element === 0) {
+            filteredStyles[index] = element;
+        }
+    });
+    return StyleSheet.create(filteredStyles);
+};
+
 export {
     validateInternetIdentifier,
     phoneOS,
@@ -25,5 +35,6 @@ export {
     isPad,
     windowDimensions,
     screenDimensions,
-    getScreenSizeByPercentage
+    getScreenSizeByPercentage,
+    componentStyles
 };

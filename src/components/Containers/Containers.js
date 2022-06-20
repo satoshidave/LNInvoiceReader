@@ -1,9 +1,9 @@
 import React from 'react';
 import { string, any, number } from 'prop-types';
-import { View, StyleSheet } from 'react-native';
-import { WHITE } from '../../variables/colors';
+import { View } from 'react-native';
+import { componentStyles } from '../../utils/misc';
 
-const containerStyles = (styles) => StyleSheet.create(styles);
+const containerStyles = (styles) => componentStyles(styles);
 
 const Container = ({
     children,
