@@ -54,7 +54,7 @@ const handleLNURL = (invoice) => {
 }
 
 const handleBolt11 = (invoice) => {
-    if (!includes(BOLT11_SCHEME, invoice)) {
+    if (!includes(invoice, BOLT11_SCHEME)) {
         return null;
     }
 
@@ -66,7 +66,6 @@ const parseInvoice = async (invoice) => {
     if (!invoice || invoice === '') return null;
 
     const lowercaseInvoice = trim(toLower(invoice));
-    console.log(lowercaseInvoice)
     let requestCode = lowercaseInvoice;
 
     if (validateInternetIdentifier(requestCode)) {

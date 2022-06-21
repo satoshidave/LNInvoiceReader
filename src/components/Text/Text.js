@@ -3,14 +3,16 @@ import { string } from 'prop-types';
 import { Text as RNText, StyleSheet } from 'react-native';
 import { get, upperFirst } from 'lodash';
 import i18n from '../../utils/i18n';
+import { componentStyles } from '../../utils/misc';
 
-const buttonStyles = styles => StyleSheet.create(styles);
+const buttonStyles = styles => componentStyles(styles);
 
-const Text = ({ text, color, fontWeight, autoCapitalize, ...props }) => (
+const Text = ({ text, color, fontWeight, marginRight, autoCapitalize, ...props }) => (
     <RNText
         style={buttonStyles({
             color,
-            fontWeight
+            fontWeight,
+            marginRight
         })}
         { ...props }
     >

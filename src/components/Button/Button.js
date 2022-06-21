@@ -7,11 +7,6 @@ import Text from '../Text';
 import i18n from '../../utils/i18n';
 import { GREEN, WHITE } from '../../variables/colors';
 
-const buttonStyles = ({ color, ...styles }) => StyleSheet.create({
-    ...styles,
-    backgroundColor: color
-});
-
 const Button = ({
     title,
     onPress,
@@ -55,7 +50,7 @@ Button.defaultProps = {
     onPress: () => {},
     color: WHITE,
     backgroundColor: GREEN,
-    fontWeight: 'regular',
+    fontWeight: 'normal',
     margin: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,

@@ -1,5 +1,5 @@
 /* eslint-disable */
-const crypto = require('crypto-js')
+const crypto = require('crypto-browserify');
 const bech32 = require('bech32')
 const secp256k1 = require('secp256k1')
 const Buffer = require('safe-buffer').Buffer

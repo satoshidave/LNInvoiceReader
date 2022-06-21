@@ -1,7 +1,8 @@
-import { Container, Row, Column } from './Containers';
+import { Container, Row, Column, MainContainer } from './Containers';
 
 export {
     Container,
     Row,
-    Column
+    Column,
+    MainContainer
 };

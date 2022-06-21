@@ -7,6 +7,7 @@ const screenDimensions = Dimensions.get("screen");
 
 const validateInternetIdentifier = (internetIdentifier) => {
     var re = /\S+@\S+\.\S+/;
+    console.log('holaaa', internetIdentifier, re.test(internetIdentifier))
     return re.test(internetIdentifier);
 };
 
@@ -28,6 +29,8 @@ const componentStyles = styles => {
     return StyleSheet.create(filteredStyles);
 };
 
+const parseSats = sats => sats / 100;
+
 export {
     validateInternetIdentifier,
     phoneOS,
@@ -36,5 +39,6 @@ export {
     windowDimensions,
     screenDimensions,
     getScreenSizeByPercentage,
-    componentStyles
+    componentStyles,
+    parseSats
 };
