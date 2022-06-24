@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { get } from 'lodash';
 import { StyleSheet } from 'react-native';
 import { parseInvoice } from '../../utils/invoices';
-import { Button, Column, Container, Row, Text } from '../../components';
+import { Button, Column, Container, Row, Text, If } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import i18n from '../../utils/i18n';
 
 const { qr } = BarCodeScanner.Constants.BarCodeType;
 
@@ -19,7 +20,7 @@ const initialInvoiceDetails = {
 const Scan = ({ navigation }) => {
     const [hasPermission, setHasPermission] = useState(null);
     const [scanned, setScanned] = useState(false);
-    const [invoiceDetails, setInvoiceDetails] = useState(initialInvoiceDetails);
+    const [invoiceDetails, setInvoiceDetails] = useState({});
     const [invoiceString, setInvoiceString] = useState('');
 
     useEffect(() => {
@@ -106,15 +107,20 @@ const Scan = ({ navigation }) => {
             style={StyleSheet.absoluteFill}
             barCodeTypes={[qr]}
         >
-            <Row backgroundColor={opacity} />
+            <Row backgroundColor={opacity} flex={1} />
             <Row style={{ flex: 1, flexDirection: 'row' }}>
                 <Column backgroundColor={opacity} />
                 <Column flex={3} />
                 <Column backgroundColor={opacity} />
             </Row>
-            <Row backgroundColor={opacity}>
-                <Button onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')} />
-                <Text text='Here we will show possible error messages' color='white' />
+            <Row backgroundColor={opacity} flex={1} alignItems='center' justifyContent='center' paddingHorizontal={30}>
+                {/* <Button
+                    title='Bypass'
+                    onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')}
+                /> */}
+                <If condition={get(invoiceDetails, 'hasError', false)}>
+                    <Text text={get(i18n, 'es.scan_error')} color='white' />
+                </If>
             </Row>
         </BarCodeScanner>
     );

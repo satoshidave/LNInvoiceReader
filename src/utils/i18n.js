@@ -15,7 +15,8 @@ const i18n = {
         maxWithdrawable: 'Máximo retirable',
         amount: 'Monto',
         timeExpireDate: 'Fecha de expiración',
-        LN: 'Lightning Network'
+        LN: 'Lightning Network',
+        scan_error: 'No se logra entender este Invoice. Por favor intenta nuevamente.'
     },
     eng: {
         button: 'button',
@@ -33,7 +34,8 @@ const i18n = {
         maxWithdrawable: 'Maximum withdrawable',
         amount: 'Amount',
         timeExpireDate: 'Expire date',
-        LN: 'Lightning Network'
+        LN: 'Lightning Network',
+        scan_error: 'Could not understand this invoice. Please try again.'
     }
 };
 
