@@ -1,5 +1,6 @@
 import { Platform, Dimensions, StyleSheet } from 'react-native';
 import { get, includes, forEach } from 'lodash';
+import { BOLT11_SCHEME } from '../variables/labels';
 
 const { OS: phoneOS, Version: phoneVersion, isPad } = Platform;
 const windowDimensions = Dimensions.get("window");
@@ -31,6 +32,8 @@ const componentStyles = styles => {
 
 const parseSats = sats => sats / 100;
 
+const isLNAddress = invoice => includes(invoice, BOLT11_SCHEME);
+
 export {
     validateInternetIdentifier,
     phoneOS,
@@ -40,5 +43,6 @@ export {
     screenDimensions,
     getScreenSizeByPercentage,
     componentStyles,
-    parseSats
+    parseSats,
+    isLNAddress
 };

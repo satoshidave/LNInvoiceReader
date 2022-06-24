@@ -10,7 +10,7 @@ const DataBox = ({ index, value }) => {
     return (
         <Row>
             <Text text={`${get(i18n, `es.${label}`, '')}:`} fontWeight='600' marginRight={5} />
-            <Text text={typeof value === 'number' ? `${parseSats(value)} sats` : get(i18n, `es.${value}`, '')} />
+            <Text text={typeof value === 'number' ? `${parseSats(value)} sats` : get(i18n, `es.${value}`, value)} />
         </Row>
     )
 };

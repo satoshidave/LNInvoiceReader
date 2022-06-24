@@ -12,7 +12,10 @@ const i18n = {
         go_to_home: 'Ir a Inicio',
         withdrawRequest: 'Retiro',
         minWithdrawable: 'Mínimo retirable',
-        maxWithdrawable: 'Máximo retirable'
+        maxWithdrawable: 'Máximo retirable',
+        amount: 'Monto',
+        timeExpireDate: 'Fecha de expiración',
+        LN: 'Lightning Network'
     },
     eng: {
         button: 'button',
@@ -27,7 +30,10 @@ const i18n = {
         go_to_home: 'Go to Home',
         withdrawRequest: 'Withdraw',
         minWithdrawable: 'Minimum withdrawable',
-        maxWithdrawable: 'Maximum withdrawable'
+        maxWithdrawable: 'Maximum withdrawable',
+        amount: 'Amount',
+        timeExpireDate: 'Expire date',
+        LN: 'Lightning Network'
     }
 };
 

@@ -1,8 +1,8 @@
 import { trim, toLower, split, size, slice, startsWith, get, toString, includes } from 'lodash';
 import bech32 from 'bech32';
 import { Buffer } from 'buffer';
-import { BOLT11_SCHEME, LIGHTNING_SCHEME, LNURL_SCHEME } from '../variables/labels';
-import { validateInternetIdentifier } from './misc';
+import { LIGHTNING_SCHEME, LNURL_SCHEME } from '../variables/labels';
+import { isLNAddress, validateInternetIdentifier } from './misc';
 import Bolt11JS from '../libs/bolt11';
 
 const handleLightningAddress = (internetIdentifier) => {
@@ -54,7 +54,7 @@ const handleLNURL = (invoice) => {
 }
 
 const handleBolt11 = (invoice) => {
-    if (!includes(invoice, BOLT11_SCHEME)) {
+    if (!isLNAddress(invoice)) {
         return null;
     }
 

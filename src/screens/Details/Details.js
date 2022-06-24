@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { get, map, omit } from 'lodash';
+import moment from 'moment';
 import QRCode from 'react-native-qrcode-svg';
 import { Container, MainContainer, Row, Column, Button } from '../../components';
 import DataBox from './DataBox';
 import i18n from '../../utils/i18n';
+import { isLNAddress } from '../../utils/misc';
 
 const initialInvoiceState = {
     text: '',
@@ -14,9 +16,14 @@ const initialInvoiceState = {
 
 const Details = ({ route, navigation, ...props }) => {
     const invoiceString = get(route, 'params.invoiceString', '');
-    const invoiceDetails = get(route, 'params.invoiceDetails', '');
+    const { decodedInvoice } = get(route, 'params.invoiceDetails', '');
 
-    console.log(invoiceDetails)
+    const invoiceFields = isLNAddress(invoiceString) ? {
+        amount: get(decodedInvoice, 'satoshis', 0),
+        tag: 'LN',
+        timeExpireDate: moment(get(decodedInvoice, 'timeExpireDate', moment('X')), 'X').format('DD/MM/YYYY HH:mm:ss')
+    } : omit(decodedInvoice || {}, ['callback', 'metadata', 'defaultDescription', 'k1'])
+
     return (
         <MainContainer>
             <Container alignItems='center'>
@@ -28,7 +35,7 @@ const Details = ({ route, navigation, ...props }) => {
                 </Row>
                 <Row paddingTop={10}>
                     <Column alignItems='center'>
-                        { map(omit(get(invoiceDetails, 'decodedInvoice', []), ['callback', 'metadata', 'defaultDescription', 'k1']), (item, index) => (
+                        { map(invoiceFields, (item, index) => (
                             <DataBox key={index} index={index} value={item} />
                         ))}
                     </Column>
