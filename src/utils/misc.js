@@ -8,7 +8,6 @@ const screenDimensions = Dimensions.get("screen");
 
 const validateInternetIdentifier = (internetIdentifier) => {
     var re = /\S+@\S+\.\S+/;
-    console.log('holaaa', internetIdentifier, re.test(internetIdentifier))
     return re.test(internetIdentifier);
 };
 

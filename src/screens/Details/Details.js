@@ -25,7 +25,6 @@ const Details = ({ route, navigation, ...props }) => {
     const createPDF = async (html) => {
         try {
             const { uri } = await printToFileAsync({ html });
-            console.log(uri);
             if (phoneOS === 'ios') {
                 await shareAsync(uri);
             } else {
@@ -43,7 +42,11 @@ const Details = ({ route, navigation, ...props }) => {
         amount: get(decodedInvoice, 'satoshis', 0),
         tag: 'LN',
         timeExpireDate: moment(get(decodedInvoice, 'timeExpireDate', moment('X')), 'X').format('DD/MM/YYYY HH:mm:ss')
-    } : omit(decodedInvoice || {}, ['callback', 'metadata', 'defaultDescription', 'k1']);
+    } : {
+        maxSendable: get(decodedInvoice, 'maxSendable', 100000000),
+        minSendable: get(decodedInvoice, 'minSendable', 1),
+        tag: get(decodedInvoice, 'tag', 'payRequest')
+    };
 
     return (
         <MainContainer>

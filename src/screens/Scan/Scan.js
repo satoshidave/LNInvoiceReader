@@ -31,6 +31,7 @@ const Scan = ({ navigation }) => {
     }, []);
 
     useEffect(() => {
+        console.log(invoiceDetails)
         const { hasError, isInvoiceLoaded } = invoiceDetails;
         if (!hasError && isInvoiceLoaded) {
             navigation.navigate('Details', { invoiceDetails, invoiceString });
@@ -93,8 +94,6 @@ const Scan = ({ navigation }) => {
             genericFinalStateOnError(error);
         }
     }
-
-    console.log(invoiceDetails)
 
     return (
         <BarCodeScanner
