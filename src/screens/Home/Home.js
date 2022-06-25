@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { size, get } from 'lodash';
 import { Button, Container, MainContainer, Text } from '../../components';
 import i18n from '../../utils/i18n';
 
-const Home = ({ navigation }) => {
-
+const Home = ({ navigation }) => {
     return (
         <MainContainer>
             <Container

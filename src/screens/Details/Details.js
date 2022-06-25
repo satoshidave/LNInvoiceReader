@@ -2,10 +2,14 @@ import React from 'react';
 import { get, map, omit } from 'lodash';
 import moment from 'moment';
 import QRCode from 'react-native-qrcode-svg';
+import { printToFileAsync } from 'expo-print';
+import { requestPermissionsAsync, createAssetAsync } from 'expo-media-library';
+import { shareAsync } from 'expo-sharing';
 import { Container, MainContainer, Row, Column, Button } from '../../components';
 import DataBox from './DataBox';
 import i18n from '../../utils/i18n';
-import { isLNAddress } from '../../utils/misc';
+import { isLNAddress, phoneOS } from '../../utils/misc';
+const html = require('../../HTML');
 
 const initialInvoiceState = {
     text: '',
@@ -18,11 +22,28 @@ const Details = ({ route, navigation, ...props }) => {
     const invoiceString = get(route, 'params.invoiceString', '');
     const { decodedInvoice } = get(route, 'params.invoiceDetails', '');
 
+    const createPDF = async (html) => {
+        try {
+            const { uri } = await printToFileAsync({ html });
+            console.log(uri);
+            if (phoneOS === 'ios') {
+                await shareAsync(uri);
+            } else {
+                const permission = await requestPermissionsAsync();
+                if (permission.granted) {
+                    await createAssetAsync(uri);
+                }
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const invoiceFields = isLNAddress(invoiceString) ? {
         amount: get(decodedInvoice, 'satoshis', 0),
         tag: 'LN',
         timeExpireDate: moment(get(decodedInvoice, 'timeExpireDate', moment('X')), 'X').format('DD/MM/YYYY HH:mm:ss')
-    } : omit(decodedInvoice || {}, ['callback', 'metadata', 'defaultDescription', 'k1'])
+    } : omit(decodedInvoice || {}, ['callback', 'metadata', 'defaultDescription', 'k1']);
 
     return (
         <MainContainer>
@@ -42,6 +63,7 @@ const Details = ({ route, navigation, ...props }) => {
                 </Row>
                 <Row>
                     <Button title={get(i18n, 'es.go_to_home')} onPress={() => navigation.popToTop()} />
+                    <Button title={get(i18n, 'es.export_to_pdf')} onPress={() => createPDF(html(invoiceString))} />
                 </Row>
             </Container>
         </MainContainer>
