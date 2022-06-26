@@ -29,7 +29,6 @@ const Details = ({ route, navigation, ...props }) => {
                 await shareAsync(uri);
             } else {
                 const QRSVG = await QRCode.toString(invoiceString, { version: 12, width: 550 })
-                console.log(androidHtml(QRSVG))
                 const { uri } = await printToFileAsync({ html: androidHtml(QRSVG) });
                 await shareAsync(uri);
             }
