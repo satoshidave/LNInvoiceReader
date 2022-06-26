@@ -17,7 +17,8 @@ const i18n = {
         timeExpireDate: 'Fecha de expiración',
         LN: 'Lightning Network',
         scan_error: 'No se logra entender este Invoice. Por favor intenta nuevamente.',
-        export_to_pdf: 'Exportar a PDF'
+        export_to_pdf: 'Exportar a PDF',
+        print: "Imprimir"
     },
     eng: {
         button: 'button',
@@ -37,7 +38,8 @@ const i18n = {
         timeExpireDate: 'Expire date',
         LN: 'Lightning Network',
         scan_error: 'Could not understand this invoice. Please try again.',
-        export_to_pdf: 'Export to PDF'
+        export_to_pdf: 'Export to PDF',
+        print: "Print"
     }
 };
 

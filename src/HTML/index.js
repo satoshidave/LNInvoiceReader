@@ -1,4 +1,14 @@
-const html = (invoice) => `
+const commonStyles = `
+    #qrcode {
+        text-align: center;
+    }
+
+    body {
+        text-align: center;
+    }
+`;
+
+const iosHtml = (invoice) => `
     <!DOCTYPE html>
     <html>
         <head>
@@ -11,13 +21,7 @@ const html = (invoice) => `
                 ${require('./html5-qrcode.js')}
             </script>
             <style type="text/css">
-                #qrcode {
-                    text-align: center;
-                }
-            
-                body {
-                    text-align: center;
-                }
+                ${commonStyles}
             </style>
         </head>
         <body>
@@ -39,4 +43,25 @@ const html = (invoice) => `
     </html>
 `;
 
-module.exports = html;
+const androidHtml = (invoice) => `
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <style type="text/css">
+            ${commonStyles}
+        </style>
+    </head>
+    <body>
+        <!-- This is where our QRCode will appear in. -->
+        <div id="qrcode">
+            ${invoice}
+        </div>
+    </body>
+</html>
+`;
+
+module.exports = {
+    iosHtml,
+    androidHtml
+};

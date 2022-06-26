@@ -1,15 +1,15 @@
 import React from 'react';
 import { get, map, omit } from 'lodash';
 import moment from 'moment';
-import QRCode from 'react-native-qrcode-svg';
+import RNQRCodeSVG from 'react-native-qrcode-svg';
 import { printToFileAsync } from 'expo-print';
-import { requestPermissionsAsync, createAssetAsync } from 'expo-media-library';
 import { shareAsync } from 'expo-sharing';
 import { Container, MainContainer, Row, Column, Button } from '../../components';
 import DataBox from './DataBox';
 import i18n from '../../utils/i18n';
 import { isLNAddress, phoneOS } from '../../utils/misc';
-const html = require('../../HTML');
+import QRCode from 'qrcode'
+const { iosHtml, androidHtml } = require('../../HTML');
 
 const initialInvoiceState = {
     text: '',
@@ -22,16 +22,16 @@ const Details = ({ route, navigation, ...props }) => {
     const invoiceString = get(route, 'params.invoiceString', '');
     const { decodedInvoice } = get(route, 'params.invoiceDetails', '');
 
-    const createPDF = async (html) => {
+      const createPDF = async () => {
         try {
-            const { uri } = await printToFileAsync({ html });
             if (phoneOS === 'ios') {
+                const { uri } = await printToFileAsync({ html: iosHtml(invoiceString) });
                 await shareAsync(uri);
             } else {
-                const permission = await requestPermissionsAsync();
-                if (permission.granted) {
-                    await createAssetAsync(uri);
-                }
+                const QRSVG = await QRCode.toString(invoiceString, { version: 12, width: 550 })
+                console.log(androidHtml(QRSVG))
+                const { uri } = await printToFileAsync({ html: androidHtml(QRSVG) });
+                await shareAsync(uri);
             }
         } catch (error) {
             console.error(error);
@@ -52,7 +52,7 @@ const Details = ({ route, navigation, ...props }) => {
         <MainContainer>
             <Container alignItems='center'>
                 <Row>
-                    <QRCode
+                    <RNQRCodeSVG
                         value={invoiceString}
                         size={200}
                     /> 
@@ -66,7 +66,7 @@ const Details = ({ route, navigation, ...props }) => {
                 </Row>
                 <Row>
                     <Button title={get(i18n, 'es.go_to_home')} onPress={() => navigation.popToTop()} />
-                    <Button title={get(i18n, 'es.export_to_pdf')} onPress={() => createPDF(html(invoiceString))} />
+                    <Button title={get(i18n, 'es.print')} onPress={() => createPDF()} />
                 </Row>
             </Container>
         </MainContainer>
