@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { get } from 'lodash';
 import { StyleSheet } from 'react-native';
+import { useFocusEffect } from '@react-navigation/native'
 import { parseInvoice } from '../../utils/invoices';
 import { Button, Column, Container, Row, Text, If } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
@@ -23,6 +24,14 @@ const Scan = ({ navigation }) => {
     const [scanned, setScanned] = useState(false);
     const [invoiceDetails, setInvoiceDetails] = useState({});
     const [invoiceString, setInvoiceString] = useState('');
+    const [isVisible, setIsVisible] = useState(false)
+
+    useFocusEffect(useCallback(() => {
+        setIsVisible(true)
+        return () => {
+            setIsVisible(false);
+        }
+    }, []));
 
     useEffect(() => {
         (async () => {
@@ -97,40 +106,45 @@ const Scan = ({ navigation }) => {
     }
 
     return (
-        <BarCodeScanner
-            onBarCodeScanned={data => {
-                if (scanned) return;
-                setScanned(true);
-                getInvoiceDetails(get(data, 'data', ''));
-                clearInvoiceData();
-            }}
-            style={StyleSheet.absoluteFill}
-            barCodeTypes={[qr]}
-        >
-            <Row backgroundColor={opacity} flex={1} />
-                <LottieView
-                    autoPlay
-                    source={require('../../../assets/animations/scanner.json')}
-                    style={{
-                        right: 10
+        <If
+            condition={isVisible}
+            then={
+                <BarCodeScanner
+                    onBarCodeScanned={data => {
+                        if (scanned) return;
+                        setScanned(true);
+                        getInvoiceDetails(get(data, 'data', ''));
+                        clearInvoiceData();
                     }}
-                    speed={0.6}
-                />
-            <Row style={{ flex: 1, flexDirection: 'row' }}>
-                <Column backgroundColor={opacity} />
-                <Column flex={3} />
-                <Column backgroundColor={opacity} />
-            </Row>
-            <Row backgroundColor={opacity} flex={1} alignItems='center' justifyContent='center' paddingHorizontal={30}>
-                {/* <Button
-                    title='Bypass'
-                    onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')}
-                /> */}
-                <If condition={get(invoiceDetails, 'hasError', false)}>
-                    <Text text={get(i18n, 'es.scan_error')} color='white' />
-                </If>
-            </Row>
-        </BarCodeScanner>
+                    style={StyleSheet.absoluteFill}
+                    barCodeTypes={[qr]}
+                >
+                    <Row backgroundColor={opacity} flex={1} />
+                        <LottieView
+                            autoPlay
+                            source={require('../../../assets/animations/scanner.json')}
+                            style={{
+                                right: 10
+                            }}
+                            speed={0.6}
+                        />
+                    <Row style={{ flex: 1, flexDirection: 'row' }}>
+                        <Column backgroundColor={opacity} />
+                        <Column flex={3} />
+                        <Column backgroundColor={opacity} />
+                    </Row>
+                    <Row backgroundColor={opacity} flex={1} alignItems='center' justifyContent='center' paddingHorizontal={30}>
+                        {/* <Button
+                            title='Bypass'
+                            onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')}
+                        /> */}
+                        <If condition={get(invoiceDetails, 'hasError', false)}>
+                            <Text text={get(i18n, 'es.scan_error')} color='white' />
+                        </If>
+                    </Row>
+                </BarCodeScanner>
+            }
+        />
     );
 };
 
