@@ -3,9 +3,8 @@ import { get } from 'lodash';
 import { StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native'
 import { parseInvoice } from '../../utils/invoices';
-import { Button, Column, Container, Row, Text, If } from '../../components';
+import { Column, Row, Text, If, Lottie } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import LottieView from 'lottie-react-native';
 import i18n from '../../utils/i18n';
 
 const { qr } = BarCodeScanner.Constants.BarCodeType;
@@ -120,13 +119,9 @@ const Scan = ({ navigation }) => {
                     barCodeTypes={[qr]}
                 >
                     <Row backgroundColor={opacity} flex={1} />
-                        <LottieView
-                            autoPlay
+                        <Lottie
                             source={require('../../../assets/animations/scanner.json')}
-                            style={{
-                                right: 10
-                            }}
-                            speed={0.6}
+                            style={{ right: 10 }}
                         />
                     <Row style={{ flex: 1, flexDirection: 'row' }}>
                         <Column backgroundColor={opacity} />

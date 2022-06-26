@@ -3,6 +3,7 @@ import Button from './Button';
 import Text from './Text';
 import Input from './Input';
 import { If } from './Conditionals';
+import Lottie from './Lottie';
 
 export {
     Container,
@@ -12,5 +13,6 @@ export {
     Text,
     Input,
     MainContainer,
-    If
+    If,
+    Lottie
 };
