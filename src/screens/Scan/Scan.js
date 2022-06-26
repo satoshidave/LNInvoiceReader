@@ -4,6 +4,7 @@ import { StyleSheet } from 'react-native';
 import { parseInvoice } from '../../utils/invoices';
 import { Button, Column, Container, Row, Text, If } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import LottieView from 'lottie-react-native';
 import i18n from '../../utils/i18n';
 
 const { qr } = BarCodeScanner.Constants.BarCodeType;
@@ -107,6 +108,14 @@ const Scan = ({ navigation }) => {
             barCodeTypes={[qr]}
         >
             <Row backgroundColor={opacity} flex={1} />
+                <LottieView
+                    autoPlay
+                    source={require('../../../assets/animations/scanner.json')}
+                    style={{
+                        right: 10
+                    }}
+                    speed={0.6}
+                />
             <Row style={{ flex: 1, flexDirection: 'row' }}>
                 <Column backgroundColor={opacity} />
                 <Column flex={3} />

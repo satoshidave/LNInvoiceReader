@@ -1,6 +1,7 @@
 import React from 'react';
 import { size, get } from 'lodash';
-import { Button, Container, MainContainer, Text } from '../../components';
+import LottieView from 'lottie-react-native';
+import { Button, Container, MainContainer, Row, Text } from '../../components';
 import i18n from '../../utils/i18n';
 
 const Home = ({ navigation }) => {
@@ -10,12 +11,24 @@ const Home = ({ navigation }) => {
                 alignItems='center'
                 justifyContent='center'
             >
-                <Text text={get(i18n, 'es.text_start_scan')} />
-                <Button
-                    title={get(i18n, 'es.scan')}
-                    fontWeight='bold'
-                    onPress={() => navigation.navigate('Scan')}
-                />
+                <Row>
+                    <LottieView
+                        autoPlay
+                        source={require('../../../assets/animations/bitcoin.json')}
+                        style={{
+                            width: 200
+                        }}
+                        speed={0.6}
+                    />
+                </Row>
+                <Row flexDirection='column' alignItems='center'>
+                    <Text text={get(i18n, 'es.text_start_scan')} />
+                    <Button
+                        title={get(i18n, 'es.scan')}
+                        fontWeight='bold'
+                        onPress={() => navigation.navigate('Scan')}
+                    />
+                </Row>
             </Container>
         </MainContainer>
     );
