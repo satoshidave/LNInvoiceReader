@@ -1,15 +1,19 @@
 {
   "expo": {
-    "name": "LNInvoice2PDF",
-    "slug": "LNInvoice2PDF",
-    "version": "1.0.0",
+    "name": "LN Invoice Reader",
+    "description": "Mobile App for read LN Invoice and do many things!",
+    "slug": "LNInvoiceReader",
+    "owner": "tiendasatoshi",
+    "version": "0.1",
+    "githubUrl": "https://github.com/satoshidave/LNInvoiceReader",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#292929",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#292929"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -23,8 +27,9 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "backgroundColor": "#292929"
+      },
+      "package": "com.tiendasatoshi.LNInvoiceReader"
     },
     "web": {
       "favicon": "./assets/favicon.png"
