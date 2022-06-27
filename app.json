@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "LN Invoice Reader",
-    "description": "Mobile App for read LN Invoice and do many things!",
+    "description": "Mobile App for read LN Invoices and do many things!",
     "slug": "LNInvoiceReader",
     "owner": "tiendasatoshi",
     "version": "0.1",
