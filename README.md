@@ -1,8 +1,8 @@
-# LNInvoice2PDF
+# LNInvoiceReader
 
 ## Scan and Export Lightning Invoices
 
-An smart mobile App to scan, share and export Lightning Invoices to PDF made with React Native + expo SDK
+An smart mobile App for read LN Invoices and do many things!
 
 ---
 
