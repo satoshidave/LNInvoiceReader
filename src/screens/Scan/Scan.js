@@ -3,7 +3,7 @@ import { get } from 'lodash';
 import { StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native'
 import { parseInvoice } from '../../utils/invoices';
-import { Column, Row, Text, If, Lottie } from '../../components';
+import { Column, Row, Text, If, Lottie, Button } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import i18n from '../../utils/i18n';
 

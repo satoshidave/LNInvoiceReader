@@ -2,6 +2,7 @@ import React from 'react';
 import { string, any, number } from 'prop-types';
 import { View } from 'react-native';
 import { componentStyles } from '../../utils/misc';
+import { BLACK } from '../../variables/colors';
 
 const containerStyles = (styles) => componentStyles(styles);
 
@@ -24,6 +25,7 @@ const Container = ({
     fixedHeight,
     width,
     margin,
+    nativeStyles,
     ...props
 }) => (
     <View
@@ -43,7 +45,8 @@ const Container = ({
             maxHeight: maxHeight || fixedHeight,
             minHeight: minHeight || fixedHeight,
             width,
-            margin
+            margin,
+            ...nativeStyles
         })}
         { ...props }
     >
@@ -116,6 +119,7 @@ const MainContainer = ({ children }) => (
         padding={10}
         alignItems={null}
         justifyContent={null}
+        backgroundColor={BLACK}
     >
         { children }
     </Container>

@@ -1,12 +1,15 @@
 import React, { useRef, useEffect } from 'react';
 import { any, object, number } from 'prop-types';
 import LottieView from 'lottie-react-native';
+import { phoneOS } from '../../utils/misc';
 
 const Lottie = ({ source, style, speed }) => {
     const animationRef = useRef(LottieView || null);
 
     useEffect(() => {
-        setTimeout(() => animationRef.current?.play(), 500)
+        if (phoneOS === 'ios') {
+            setTimeout(() => animationRef.current?.play(), 500);
+        }
     }, []);
 
     return (

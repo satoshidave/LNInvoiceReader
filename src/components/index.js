@@ -4,6 +4,8 @@ import Text from './Text';
 import Input from './Input';
 import { If } from './Conditionals';
 import Lottie from './Lottie';
+import Icon from './Icon';
+import Image from './Image';
 
 export {
     Container,
@@ -14,5 +16,7 @@ export {
     Input,
     MainContainer,
     If,
-    Lottie
+    Lottie,
+    Icon,
+    Image
 };

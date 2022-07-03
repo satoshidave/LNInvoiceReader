@@ -1,9 +1,9 @@
-const GREEN = '#01B757';
+const ORANGE = '#F7941E';
 const WHITE = '#FFFFFF';
-const BLACK = '#000000';
+const BLACK = '#292929';
 
 export {
-    GREEN,
+    ORANGE,
     WHITE,
     BLACK
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { get, map, omit } from 'lodash';
+import { get, map } from 'lodash';
 import moment from 'moment';
 import RNQRCodeSVG from 'react-native-qrcode-svg';
 import { printToFileAsync } from 'expo-print';
@@ -9,6 +9,7 @@ import DataBox from './DataBox';
 import i18n from '../../utils/i18n';
 import { isLNAddress, phoneOS } from '../../utils/misc';
 import QRCode from 'qrcode'
+import { WHITE } from '../../variables/colors';
 const { iosHtml, androidHtml } = require('../../HTML');
 
 const initialInvoiceState = {
@@ -28,7 +29,8 @@ const Details = ({ route, navigation, ...props }) => {
                 const { uri } = await printToFileAsync({ html: iosHtml(invoiceString) });
                 await shareAsync(uri);
             } else {
-                const QRSVG = await QRCode.toString(invoiceString, { version: 12, width: 550 })
+                const version = isLNAddress(invoiceString) ? 14 : 12;
+                const QRSVG = await QRCode.toString(invoiceString, { version, width: 550 });
                 const { uri } = await printToFileAsync({ html: androidHtml(QRSVG) });
                 await shareAsync(uri);
             }
@@ -50,7 +52,7 @@ const Details = ({ route, navigation, ...props }) => {
     return (
         <MainContainer>
             <Container alignItems='center'>
-                <Row>
+                <Row padding={20} borderRadius={5} backgroundColor={WHITE}>
                     <RNQRCodeSVG
                         value={invoiceString}
                         size={200}

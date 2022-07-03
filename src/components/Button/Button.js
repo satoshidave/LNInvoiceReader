@@ -1,11 +1,12 @@
 import React from 'react';
-import { string, func, number } from 'prop-types';
+import { string, func, number, object } from 'prop-types';
 import { get } from 'lodash';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { Container } from '../Containers';
 import Text from '../Text';
 import i18n from '../../utils/i18n';
-import { GREEN, WHITE } from '../../variables/colors';
+import { ORANGE, WHITE } from '../../variables/colors';
+import { phoneOS } from '../../utils/misc';
 
 const Button = ({
     title,
@@ -16,7 +17,10 @@ const Button = ({
     margin,
     paddingHorizontal,
     paddingVertical,
-    borderRadius
+    borderRadius,
+    alignItems,
+    shadowBox,
+    children
 }) => (
     <TouchableOpacity onPress={onPress}>
         <Container
@@ -27,8 +31,11 @@ const Button = ({
             paddingVertical={paddingVertical}
             borderRadius={borderRadius}
             margin={margin}
+            alignItems={alignItems}
+            shadowBox={shadowBox}
+            {...nativeStyles}
         >
-            <Text color={color} text={title} fontWeight={fontWeight} autoCapitalize />
+            { children || <Text color={color} text={title} fontWeight={fontWeight} autoCapitalize /> }
         </Container>
     </TouchableOpacity>
 );
@@ -42,19 +49,30 @@ Button.propTypes = {
     margin: number,
     paddingHorizontal: number,
     paddingVertical: number,
-    borderRadius: number
+    borderRadius: number,
+    alignItems: string,
+    shadowBox: object
 };
+
+const nativeStyles = phoneOS === 'ios' ?
+    {
+        shadowColor: '#000000',
+        shadowOffset: { width: 2, height: 2 },
+        shadowOpacity: 0.6,
+        shadowRadius: 3
+    } : { elevation: 2 };
 
 Button.defaultProps = {
     title: get(i18n, 'es.button'),
     onPress: () => {},
     color: WHITE,
-    backgroundColor: GREEN,
+    backgroundColor: ORANGE,
     fontWeight: 'normal',
     margin: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderRadius: 5
+    borderRadius: 5,
+    alignItems: 'center'
 }
 
 export default Button;
