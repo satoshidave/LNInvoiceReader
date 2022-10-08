@@ -6,7 +6,6 @@ import { printToFileAsync } from 'expo-print';
 import { shareAsync } from 'expo-sharing';
 import { Container, MainContainer, Row, Column, Button } from '../../components';
 import DataBox from './DataBox';
-import i18n from '../../utils/i18n';
 import { isLNAddress, phoneOS } from '../../utils/misc';
 import QRCode from 'qrcode'
 import { WHITE } from '../../variables/colors';
@@ -66,8 +65,8 @@ const Details = ({ route, navigation, ...props }) => {
                     </Column>
                 </Row>
                 <Row>
-                    <Button title={get(i18n, 'es.go_to_home')} onPress={() => navigation.popToTop()} />
-                    <Button title={get(i18n, 'es.print')} onPress={() => createPDF()} />
+                    <Button title='go_to_home' onPress={() => navigation.popToTop()} />
+                    <Button title='print' onPress={() => createPDF()} />
                 </Row>
             </Container>
         </MainContainer>

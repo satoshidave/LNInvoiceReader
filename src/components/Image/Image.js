@@ -2,12 +2,12 @@ import React from 'react';
 import { Image as RNImage } from 'react-native';
 import { componentStyles } from '../../utils/misc';
 
-const Image = ({ color, width, height, ...props }) => (
+const Image = ({ color, width, height, size, ...props }) => (
     <RNImage
         style={componentStyles({
             tintColor: color,
-            width,
-            height
+            width: size || width,
+            height: size || height
         })}
         {...props}
     />

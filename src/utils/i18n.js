@@ -18,7 +18,9 @@ const i18n = {
         LN: 'Lightning Network',
         scan_error: 'No se logra entender este Invoice. Por favor intenta nuevamente.',
         export_to_pdf: 'Exportar a PDF',
-        print: "Imprimir"
+        print: "Imprimir",
+        home: 'Inicio',
+        details: 'Detalle'
     },
     eng: {
         button: 'button',
@@ -39,7 +41,9 @@ const i18n = {
         LN: 'Lightning Network',
         scan_error: 'Could not understand this invoice. Please try again.',
         export_to_pdf: 'Export to PDF',
-        print: "Print"
+        print: "Print",
+        home: 'Home',
+        details: 'Detail'
     }
 };
 

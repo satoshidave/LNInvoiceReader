@@ -5,7 +5,6 @@ import { useFocusEffect } from '@react-navigation/native'
 import { parseInvoice } from '../../utils/invoices';
 import { Column, Row, Text, If, Lottie, Button } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-import i18n from '../../utils/i18n';
 
 const { qr } = BarCodeScanner.Constants.BarCodeType;
 
@@ -131,10 +130,11 @@ const Scan = ({ navigation }) => {
                     <Row backgroundColor={opacity} flex={1} alignItems='center' justifyContent='center' paddingHorizontal={30}>
                         {/* <Button
                             title='Bypass'
+                            withoutTranslation
                             onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')}
                         /> */}
                         <If condition={get(invoiceDetails, 'hasError', false)}>
-                            <Text text={get(i18n, 'es.scan_error')} color='white' />
+                            <Text text='scan_error' color='white' />
                         </If>
                     </Row>
                 </BarCodeScanner>

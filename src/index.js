@@ -1,10 +1,12 @@
 import React from 'react';
-import { map } from 'lodash';
+import { get, map, upperFirst } from 'lodash';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StatusBar } from 'expo-status-bar';
 import { Home, Details, Scan } from './screens';
 import { ORANGE, WHITE } from './variables/colors';
+import i18n from './utils/i18n';
+import { useLanguageStore } from './libs/store';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -37,11 +39,20 @@ const screens = [
 ];
 
 export default function App() {
+    const language = useLanguageStore(({ language }) => language);
     return (
         <>
             <NavigationContainer>
                 <Navigator>
-                    { map(screens, screen => <Screen { ...screen } options={screenOptions} />) }
+                    { map(screens, ({title, ...screen}) => (
+                        <Screen
+                            { ...screen }
+                            options={{
+                                title: upperFirst(get(i18n, `${language}.${get(screen, 'key')}`)),
+                                ...screenOptions
+                            }}
+                        />
+                    )) }
                 </Navigator>
             </NavigationContainer>
             <StatusBar style='light' barStyle='light-content' />

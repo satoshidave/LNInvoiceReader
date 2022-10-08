@@ -45,7 +45,8 @@
     "rn-nodeify": "^10.3.0",
     "safe-buffer": "^5.2.1",
     "secp256k1": "3.7.1",
-    "stream-browserify": "^1.0.0"
+    "stream-browserify": "^1.0.0",
+    "zustand": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

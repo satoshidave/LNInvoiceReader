@@ -1,18 +1,22 @@
 import React from 'react';
-import {} from 'prop-types';
-import { get, includes } from 'lodash';
+import { string, oneOfType, number } from 'prop-types';
 import { Row, Text } from '../../components';
-import i18n from '../../utils/i18n';
 import { parseSats } from '../../utils/misc';
 
 const DataBox = ({ index, value }) => {
     const label = index === 'tag' ? 'invoice_type' : index;
+    const valueIsNumber = typeof value === 'number';
     return (
         <Row>
-            <Text text={`${get(i18n, `es.${label}`, '')}:`} fontWeight='600' marginRight={5} />
-            <Text text={typeof value === 'number' ? `${parseSats(value)} sats` : get(i18n, `es.${value}`, value)} />
+            <Text text={label} fontWeight='600' marginRight={5} />
+            <Text text={valueIsNumber ? `${parseSats(value)} sats` : value} withoutTranslation={valueIsNumber} />
         </Row>
     )
+};
+
+DataBox.propTypes = {
+    index: string,
+    value: oneOfType([string, number])
 };
 
 export default DataBox;

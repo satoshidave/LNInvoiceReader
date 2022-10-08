@@ -1,10 +1,8 @@
 import React from 'react';
-import { string, func, number, object } from 'prop-types';
-import { get } from 'lodash';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { string, func, number, object, bool } from 'prop-types';
+import { TouchableOpacity } from 'react-native';
 import { Container } from '../Containers';
 import Text from '../Text';
-import i18n from '../../utils/i18n';
 import { ORANGE, WHITE } from '../../variables/colors';
 import { phoneOS } from '../../utils/misc';
 
@@ -20,25 +18,38 @@ const Button = ({
     borderRadius,
     alignItems,
     shadowBox,
-    children
-}) => (
-    <TouchableOpacity onPress={onPress}>
-        <Container
-            backgroundColor={backgroundColor}
-            flexDirection='column'
-            flex={0}
-            paddingHorizontal={paddingHorizontal}
-            paddingVertical={paddingVertical}
-            borderRadius={borderRadius}
-            margin={margin}
-            alignItems={alignItems}
-            shadowBox={shadowBox}
-            {...nativeStyles}
-        >
-            { children || <Text color={color} text={title} fontWeight={fontWeight} autoCapitalize /> }
-        </Container>
-    </TouchableOpacity>
-);
+    children,
+    withoutTranslation
+}) => {
+    const textComponentProps = {
+        color,
+        text: title,
+        fontWeight,
+        autoCapitalize: true,
+        withoutTranslation
+    };
+
+    const containerComponentProps = {
+        backgroundColor,
+        flexDirection: 'column',
+        flex: 0,
+        paddingHorizontal,
+        paddingVertical,
+        borderRadius,
+        margin,
+        alignItems,
+        shadowBox,
+        ...nativeStyles
+    };
+
+    return (
+        <TouchableOpacity onPress={onPress}>
+            <Container {...containerComponentProps}>
+                { children || <Text {...textComponentProps} /> }
+            </Container>
+        </TouchableOpacity>
+    );
+}
 
 Button.propTypes = {
     title: string,
@@ -51,7 +62,8 @@ Button.propTypes = {
     paddingVertical: number,
     borderRadius: number,
     alignItems: string,
-    shadowBox: object
+    shadowBox: object,
+    withoutTranslation: bool
 };
 
 const nativeStyles = phoneOS === 'ios' ?
@@ -63,7 +75,7 @@ const nativeStyles = phoneOS === 'ios' ?
     } : { elevation: 2 };
 
 Button.defaultProps = {
-    title: get(i18n, 'es.button'),
+    title: 'button',
     onPress: () => {},
     color: WHITE,
     backgroundColor: ORANGE,
@@ -72,7 +84,8 @@ Button.defaultProps = {
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 5,
-    alignItems: 'center'
+    alignItems: 'center',
+    withoutTranslation: false
 }
 
 export default Button;

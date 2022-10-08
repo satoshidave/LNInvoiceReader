@@ -83,10 +83,10 @@ Container.defaultProps = {
     justifyContent: 'flex-start'
 };
 
-const Row = ({ children, ...props }) => (
+const Row = ({ children, flex, ...props }) => (
     <Container
         flexDirection='row'
-        flex={0}
+        flex={flex}
         { ...props }
     >
         { children }
@@ -94,11 +94,13 @@ const Row = ({ children, ...props }) => (
 );
 
 Row.propTypes = {
-    children: any
+    children: any,
+    flex: number
 };
 
 Row.defaultProps = {
-    children: null
+    children: null,
+    flex: 0
 };
 
 const Column = ({ children, ...props }) => (
