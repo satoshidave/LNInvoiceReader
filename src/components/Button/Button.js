@@ -1,9 +1,9 @@
 import React from 'react';
 import { string, func, number, object, bool } from 'prop-types';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, TouchableWithoutFeedback } from 'react-native';
 import { Container } from '../Containers';
 import Text from '../Text';
-import { ORANGE, WHITE } from '../../variables/colors';
+import { GREY, ORANGE, WHITE } from '../../variables/colors';
 import { phoneOS } from '../../utils/misc';
 
 const Button = ({
@@ -19,7 +19,8 @@ const Button = ({
     alignItems,
     shadowBox,
     children,
-    withoutTranslation
+    withoutTranslation,
+    disabled
 }) => {
     const textComponentProps = {
         color,
@@ -42,14 +43,29 @@ const Button = ({
         ...nativeStyles
     };
 
+    const TouchableWrapper = ({ children }) => {
+        if (disabled) return (
+            <TouchableWithoutFeedback>
+                { children({ backgroundColor: GREY }) }
+            </TouchableWithoutFeedback>
+        );
+        return (
+            <TouchableOpacity onPress={onPress}>
+                { children({}) }
+            </TouchableOpacity>
+        );
+    };
+
     return (
-        <TouchableOpacity onPress={onPress}>
-            <Container {...containerComponentProps}>
-                { children || <Text {...textComponentProps} /> }
-            </Container>
-        </TouchableOpacity>
+        <TouchableWrapper>
+            {touchableProps => (
+                <Container {...containerComponentProps} {...touchableProps}>
+                    { children || <Text {...textComponentProps} /> }
+                </Container>
+            )}
+        </TouchableWrapper>
     );
-}
+};
 
 Button.propTypes = {
     title: string,
@@ -63,7 +79,8 @@ Button.propTypes = {
     borderRadius: number,
     alignItems: string,
     shadowBox: object,
-    withoutTranslation: bool
+    withoutTranslation: bool,
+    disabled: bool
 };
 
 const nativeStyles = phoneOS === 'ios' ?
@@ -83,9 +100,10 @@ Button.defaultProps = {
     margin: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderRadius: 5,
+    borderRadius: 3,
     alignItems: 'center',
-    withoutTranslation: false
-}
+    withoutTranslation: false,
+    disabled: false
+};
 
 export default Button;

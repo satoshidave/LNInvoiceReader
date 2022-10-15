@@ -3,6 +3,7 @@ import { Button, Container, Icon, Lottie, MainContainer, Row, Text, Image } from
 import { Scan } from '../../../assets/icons';
 import { windowDimensions } from '../../utils/misc';
 import LanguageSelector from '../../components/LanguageSelector/LanguageSelector';
+import InvoiceFormInput from '../../components/InvoiceFormInput/InvoiceFormInput';
 
 const Home = ({ navigation }) => (
     <MainContainer>
@@ -25,8 +26,8 @@ const Home = ({ navigation }) => (
                     onPress={() => navigation.navigate('Scan')}
                 >
                     <Icon source={Scan} />
-                    <Text text='scan' fontWeight='bold' autoCapitalize />
                 </Button>
+                <InvoiceFormInput navigation={navigation} />
             </Row>
         </Container>
         <Row alignItems='flex-end' justifyContent='center' padding={20}>

@@ -2,7 +2,7 @@ import React from 'react';
 import { string, any, number } from 'prop-types';
 import { View } from 'react-native';
 import { componentStyles } from '../../utils/misc';
-import { BLACK } from '../../variables/colors';
+import { DARK } from '../../variables/colors';
 
 const containerStyles = (styles) => componentStyles(styles);
 
@@ -121,7 +121,7 @@ const MainContainer = ({ children }) => (
         padding={10}
         alignItems={null}
         justifyContent={null}
-        backgroundColor={BLACK}
+        backgroundColor={DARK}
     >
         { children }
     </Container>

@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { get } from 'lodash';
-import { StyleSheet } from 'react-native';
+import React, { useState, useEffect, useCallback } from 'react';
+import { get } from 'lodash';
+import { StyleSheet } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native'
-import { parseInvoice } from '../../utils/invoices';
 import { Column, Row, Text, If, Lottie, Button } from '../../components';
 import { BarCodeScanner } from 'expo-barcode-scanner';
+import { getInvoiceDetails } from '../../utils/misc';
 
 const { qr } = BarCodeScanner.Constants.BarCodeType;
 
@@ -52,55 +52,11 @@ const Scan = ({ navigation }) => {
     }, 3000);
 
     if (hasPermission === null) {
-        return <Text text='Requesting for camera permission' />;
+        return <Text text='requesting_camera_permission' />;
       }
 
     if (hasPermission === false) {
-        return <Text text='No access to camera' />;
-    }
-
-    const getInvoiceDetails = async (invoice) => {
-        const genericFinalStateOnError = message => setInvoiceDetails({
-            hasError: true,
-            decodedInvoice: {},
-            isInvoiceLoaded: false,
-            error: { message }
-        });
-
-        try {
-            let response;
-            const parsedInvoiceResponse = await parseInvoice(invoice);
-
-            if (!parsedInvoiceResponse) return genericFinalStateOnError('Please enter a valid request or address and try again.');
-
-            const { isLNURL, data, error, isLNAddress } = parsedInvoiceResponse;
-
-            if (error && size(error) > 0) return genericFinalStateOnError(error);
-
-            if (!data) return genericFinalStateOnError('Could not parse/understand this invoice or request. Please try again.');
-
-            if (isLNURL) {
-                if (isLNAddress) {
-                    response = data;
-                } else {
-                    response = await data;
-                }
-            } else {
-                response = data;
-            }
-
-            if (response) {
-                setInvoiceString(invoice);
-                setInvoiceDetails({
-                    hasError: false,
-                    decodedInvoice: response,
-                    isInvoiceLoaded: true,
-                    error: {}
-                });
-            }
-        } catch (error) {
-            genericFinalStateOnError(error);
-        }
+        return <Text text='no_camera_permission' />;
     }
 
     return (
@@ -109,9 +65,11 @@ const Scan = ({ navigation }) => {
             then={
                 <BarCodeScanner
                     onBarCodeScanned={data => {
+                        const invoice = get(data, 'data', '');
                         if (scanned) return;
                         setScanned(true);
-                        getInvoiceDetails(get(data, 'data', ''));
+                        setInvoiceString(invoice);
+                        getInvoiceDetails(invoice, setInvoiceDetails);
                         clearInvoiceData();
                     }}
                     style={StyleSheet.absoluteFill}
@@ -128,10 +86,15 @@ const Scan = ({ navigation }) => {
                         <Column backgroundColor={opacity} />
                     </Row>
                     <Row backgroundColor={opacity} flex={1} alignItems='center' justifyContent='center' paddingHorizontal={30}>
+                        {/* The button commented below, is for bypass purposes */}
                         {/* <Button
                             title='Bypass'
                             withoutTranslation
-                            onPress={() => getInvoiceDetails('LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9')}
+                            onPress={() => {
+                                const invoice = 'LNURL1DP68GURN8GHJ7MR9VAJKUEPWD3HXY6T5WVHXXMMD9AKXUATJD3CZ7CTSDYHHVVF0D3H82UNV9UCNVWPNVMNGY9';
+                                setInvoiceString(invoice);
+                                getInvoiceDetails(invoice, setInvoiceDetails);
+                            }}
                         /> */}
                         <If condition={get(invoiceDetails, 'hasError', false)}>
                             <Text text='scan_error' color='white' />

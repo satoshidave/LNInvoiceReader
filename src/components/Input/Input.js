@@ -1,52 +1,62 @@
 import React from 'react';
-import { string, number } from 'prop-types';
+import { number, bool } from 'prop-types';
 import { TextInput, StyleSheet } from 'react-native';
 import { Container } from '../Containers';
-import { GREEN } from '../../variables/colors';
+import { BLACK, WHITE } from '../../variables/colors';
+import { getScreenSizeByPercentage } from '../../utils/misc';
 
 const Input = ({
-    borderColor,
     borderRadius,
     border,
     maxHeight,
     paddingVertical,
     paddingHorizontal,
     width,
+    fullWidth,
+    marginTop,
     ...props
-}) => (
-    <Container
-        border={border}
-        borderRadius={borderRadius}
-        paddingVertical={paddingVertical}
-        paddingHorizontal={paddingHorizontal}
-        maxHeight={maxHeight}
-        borderColor={borderColor}
-        width={width}
-    >
-        <TextInput
-            { ...props }
-        />
-    </Container>
-);
+}) => {
+    const containerProps = {
+        backgroundColor: BLACK,
+        width: fullWidth ? getScreenSizeByPercentage(80, 'width') : width,
+        border,
+        borderRadius,
+        paddingVertical,
+        paddingHorizontal,
+        maxHeight,
+        marginTop
+    };
+
+    return (
+        <Container {...containerProps}>
+            <TextInput
+                { ...props }
+            />
+        </Container>
+    );
+};
 
 Input.propTypes = {
-    borderColor: string,
     borderRadius: number,
     border: number,
     maxHeight: number,
     paddingVertical: number,
     paddingHorizontal: number,
-    width: number
+    width: number,
+    fullWidth: bool,
+    marginTop: number
 };
 
 Input.defaultProps = {
-    borderColor: GREEN,
-    borderRadius: 10,
+    borderRadius: 3,
     paddingVertical: 10,
     paddingHorizontal: 20,
     border: 1,
     maxHeight: 40,
-    width: 100
+    width: 100,
+    fullWidth: false,
+    color: WHITE,
+    marginTop: 0
 };
 
 export default Input;

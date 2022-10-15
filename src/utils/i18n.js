@@ -5,6 +5,7 @@ const i18n = {
         scan: 'escanear',
         input_invoice_placeholder: 'Inserte su Invoice aquí',
         text_start_scan: 'Para comenzar, escanea tu Invoice de LN!',
+        text_start_insert: 'o ingresa el código del Invoice a continuación ;-)',
         maxSendable: 'Máximo enviable',
         minSendable: 'Mínimo enviable',
         invoice_type: 'Tipo de Invoice',
@@ -20,7 +21,10 @@ const i18n = {
         export_to_pdf: 'Exportar a PDF',
         print: "Imprimir",
         home: 'Inicio',
-        details: 'Detalle'
+        details: 'Detalle',
+        search: 'buscar',
+        requesting_camera_permission: 'Solicitando permisos para la cámara',
+        no_camera_permission: 'Sin acceso a la camara :-('
     },
     eng: {
         button: 'button',
@@ -28,6 +32,7 @@ const i18n = {
         scan: 'scan',
         input_invoice_placeholder: 'Insert your Invoice here',
         text_start_scan: 'To start, scan your LN Invoice!',
+        text_start_insert: 'or insert Invoice address below ;-)',
         maxSendable: 'Maximum sendable',
         minSendable: 'Minimum sendable',
         invoice_type: 'Invoice type',
@@ -43,7 +48,10 @@ const i18n = {
         export_to_pdf: 'Export to PDF',
         print: "Print",
         home: 'Home',
-        details: 'Detail'
+        details: 'Detail',
+        search: 'search',
+        requesting_camera_permission: 'Requesting for camera permission',
+        no_camera_permission: 'No access to camera :-('
     }
 };
 
