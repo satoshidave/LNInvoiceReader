@@ -24,7 +24,9 @@ const i18n = {
         details: 'Detalle',
         search: 'buscar',
         requesting_camera_permission: 'Solicitando permisos para la cámara',
-        no_camera_permission: 'Sin acceso a la camara :-('
+        no_camera_permission: 'Sin acceso a la camara :-(',
+        disconnected: 'Sin Conexión',
+        disconnected_description: 'Parece que no estás conectado a internet. Conéctate e inténtalo de nuevo.'
     },
     eng: {
         button: 'button',
@@ -51,7 +53,9 @@ const i18n = {
         details: 'Detail',
         search: 'search',
         requesting_camera_permission: 'Requesting for camera permission',
-        no_camera_permission: 'No access to camera :-('
+        no_camera_permission: 'No access to camera :-(',
+        disconnected: 'No Connected',
+        disconnected_description: 'Seems you are not connected to internet. Connect your phone to internet and try it again.'
     }
 };
 
