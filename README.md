@@ -23,7 +23,6 @@ OnChain Bitcoin - addresses / QR Codes - will be added soon :-)
 
 ## This App continues in development!
 
-Do you would like to watch this live development? Follow us on Twitch [https://www.twitch.tv/tiendasatoshi](<https://www.twitch.tv/tiendasatoshi>) and you will see how we build it! Also, you can give us feedback and ideas to introduce more features to this app ;-)
 
 ---
 
