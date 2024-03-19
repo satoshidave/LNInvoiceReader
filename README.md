@@ -8,7 +8,6 @@ An smart mobile App to scan, share and export Lightning Invoices to PDF made wit
 
 ## This App is currently on development!
 
-Do you would like to watch this live development? Follow us on Twitch [https://www.twitch.tv/tiendasatoshi](<https://www.twitch.tv/tiendasatoshi>) and you will see how we build it! Also, you can give us feedback and ideas to introduce more features to this app ;-)
 
 ---
 
